@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-fadeIn: fadeIn 0.4s ease-out forwards;
+  --animate-scaleUp: scaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slideDown: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.97) translateY(4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
