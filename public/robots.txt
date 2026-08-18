@@ -1,0 +1,2 @@
+User-agent: * Allow: / Sitemap: https://www.qrscoop.com/sitemap.xml 
+This tells Google it can crawl your entire site and where your sitemap is. 
