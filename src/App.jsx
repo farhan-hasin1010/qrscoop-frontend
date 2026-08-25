@@ -1548,14 +1548,10 @@ export default function App() {
               <div className="text-center sm:text-left space-y-0.5 flex-1">
                 <h3 className="text-xl font-black text-slate-900 capitalize">{userProfile.name || 'User'}</h3>
                 <p className="text-xs font-medium text-slate-400">{userProfile.email}</p>
-                {userProfile.location && (
-                  <p className="text-xs font-medium text-slate-400">📍 {userProfile.location}</p>
-                )}
                 <div className="flex items-center gap-2 mt-1">
                   <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${isPremium ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-slate-100 text-slate-500'}`}>
                     {isPremium ? '👑 Pro' : 'Free Plan'}
                   </span>
-                  <code className="text-[9px] font-mono font-bold text-slate-300 bg-slate-50 border px-1.5 py-0.5 rounded">{userId}</code>
                 </div>
               </div>
               <div className="flex gap-2.5">
