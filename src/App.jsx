@@ -116,6 +116,7 @@ export default function App() {
   const [authForm, setAuthForm]       = useState({ name: '', email: '', password: '' });
   const [authLoading, setAuthLoading] = useState(false);
   const [isPremium, setIsPremium]     = useState(false);
+  const [premiumUntil, setPremiumUntil] = useState(null); // Add this line
   const [userProfile, setUserProfile] = useState({ name: '', email: '', avatar: '', location: '' });
 
   // Derived — never stored separately in state
@@ -293,6 +294,7 @@ export default function App() {
         });
         const d = await res.json();
         setIsPremium(d.isPremium || false);
+        setPremiumUntil(d.premiumUntil || null); // Add this line
       } catch (err) {
         console.error('Failed to load user profile:', err);
       }
@@ -1552,6 +1554,11 @@ export default function App() {
                   <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${isPremium ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-slate-100 text-slate-500'}`}>
                     {isPremium ? '👑 Pro' : 'Free Plan'}
                   </span>
+                  {isPremium && premiumUntil && (
+                    <span className="text-[10px] font-bold text-slate-400">
+                      Valid until {new Date(premiumUntil).toLocaleDateString()}
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="flex gap-2.5">
