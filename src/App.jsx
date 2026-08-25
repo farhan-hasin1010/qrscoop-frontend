@@ -399,8 +399,9 @@ export default function App() {
     }
   };
 
-  // Static QR generation — works for guests too; no server redirect
+  // Static QR generation — works for guests too; calls server redirect
   const handleGenerateStaticQr = async () => {
+    if (!session) { nav('login'); return; }
     const payload = getPayload();
     if (!payload) { showToast('Please fill in the content fields.', 'error'); return; }
     if (contentType === 'link' && !isValidHttpUrl(payload)) {
@@ -408,7 +409,7 @@ export default function App() {
       return;
     }
 
-    // The QR encodes the raw destination directly (no server redirect)
+    // The QR encodes the raw destination directly (calls server redirect)
     lastEncodedDataRef.current = payload;
     qrInstanceRef.current.update({ ...currentQrOpts(), data: payload });
     setActiveShortCode('');   // no short code for static QRs
@@ -769,7 +770,7 @@ export default function App() {
             <section className="max-w-7xl mx-auto px-4 md:px-8 pb-20">
               <div className="bg-slate-900 rounded-3xl p-10 md:p-16 text-center text-white space-y-5">
                 <h2 className="text-3xl md:text-4xl font-black">Start creating for free today</h2>
-                <p className="text-slate-400 font-medium max-w-lg mx-auto">No account required for static QR codes. Sign up for dynamic tracking and analytics.</p>
+                <p className="text-slate-400 font-medium max-w-lg mx-auto">Create a free account to generate, customize, and save both static and dynamic QR codes.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
                   <button onClick={() => nav('app')} className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-3.5 rounded-full transition shadow-lg">
                     Generate Free QR →
@@ -832,7 +833,8 @@ export default function App() {
                       </>
                     ) : (
                       <>
-                        <span className="font-black">Static:</span> QR encodes your destination directly — no server redirect, no expiry, no tracking. Works forever. Free for all users, no account required.
+                        <span className="font-black">Static:</span> QR encodes your destination directly — no server redirect, no expiry, no tracking. Works forever.
+                        {!userId && <span className="block mt-1 text-blue-600 font-bold">→ Sign in required to generate a Static QR.</span>}
                       </>
                     )}
                   </div>
@@ -1169,8 +1171,8 @@ export default function App() {
                   {/* Download section */}
                   {showResult ? (
                     /* Static QRs and dynamic QRs both get download buttons.
-                       Static QRs don't require login. */
-                    (userId || qrMode === 'static') ? (
+                       Static QRs require login. */
+                    userId ? (
                       <div className="w-full space-y-2">
                         <div className="grid grid-cols-2 gap-2">
                           <button onClick={() => handleDownload('png')}
@@ -1261,7 +1263,7 @@ export default function App() {
               <h2 className="text-2xl font-black text-slate-900 mb-6">Frequently asked questions</h2>
               {[
                 { q: 'What\'s the difference between Static and Dynamic QR codes?', a: 'Static QR codes encode your content directly — once printed, they can\'t be changed. Dynamic QR codes point to a redirect URL on our server, so you can update the destination anytime without reprinting.' },
-                { q: 'Do I need an account to use QRScoop?', a: 'No! Static QR codes work for everyone with no account required. Sign up only if you want Dynamic QR codes with click tracking, or to save your codes to a dashboard.' },
+                { q: 'Yes, a free account is required to generate and download your QR codes. Free accounts include unlimited static QR codes and a 7-day trial for dynamic codes.' },
                 { q: 'How small can I print my QR code?', a: 'The minimum recommended print size is 2cm × 2cm (about 0.75 inches). Smaller than that and most cameras struggle to focus. For complex QR codes (lots of data or high error correction), go at least 3–4cm.' },
                 { q: 'Will a logo in the center break my QR code?', a: 'No — as long as your error correction level is set to Q (25%) or H (30%). QR codes are designed to remain scannable even when up to 30% of their surface is obscured.' },
                 { q: 'Do QR codes expire?', a: 'Static QR codes never expire — they\'re just an image. Free Dynamic QR codes expire after 7 days. Upgrade to Pro for permanent dynamic links.' },
