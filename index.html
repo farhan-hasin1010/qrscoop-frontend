@@ -8,59 +8,132 @@
   <meta name="description"
     content="Create beautiful, branded QR codes in seconds. Customize colors, add your logo, and track scans in real time. Free static QR codes, no account needed." />
   <meta name="keywords"
-    content="QR code generator, free QR code, dynamic QR code, QR code tracker, custom QR code, branded QR code" />
+    content="QR code generator, free QR code, dynamic QR code, QR code tracker, custom QR code, branded QR code, QR code with logo, free QR code no sign up" />
   <meta name="author" content="QRScoop" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.qrscoop.com" /> <!-- Open Graph (WhatsApp, Facebook, LinkedIn previews) -->
+  <link rel="canonical" href="https://www.qrscoop.com" />
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://www.qrscoop.com" />
+
+  <!-- Open Graph -->
   <meta property="og:title" content="QRScoop — Free QR Code Generator" />
   <meta property="og:description"
     content="Create beautiful branded QR codes with custom colors, logos and real-time scan tracking." />
   <meta property="og:image" content="https://www.qrscoop.com/newlogo.png" />
   <meta property="og:url" content="https://www.qrscoop.com" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="QRScoop" /> <!-- Twitter Card -->
+  <meta property="og:site_name" content="QRScoop" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="QRScoop — Free QR Code Generator" />
   <meta name="twitter:description"
     content="Create beautiful branded QR codes with custom colors, logos and real-time scan tracking." />
   <meta name="twitter:image" content="https://www.qrscoop.com/newlogo.png" />
+
   <link rel="icon" href="/newlogo.png" type="image/png" />
+
+  <!-- Schema Markup -->
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "QRScoop",
-  "url": "https://www.qrscoop.com",
-  "logo": "https://www.qrscoop.com/newlogo.png",
-  "description": "Free QR code generator with custom design, logo embedding and real-time scan tracking. Create beautiful branded QR codes in seconds.",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Web",
-  "browserRequirements": "Requires JavaScript",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "INR",
-    "description": "Free static QR codes for all users"
-  },
-  "featureList": [
-    "Custom QR code design",
-    "Logo embedding",
-    "Dynamic QR tracking",
-    "PNG and SVG export",
-    "WiFi QR codes",
-    "vCard QR codes"
-  ],
-  "author": {
-    "@type": "Organization",
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
     "name": "QRScoop",
-    "url": "https://www.qrscoop.com"
+    "url": "https://www.qrscoop.com",
+    "logo": "https://www.qrscoop.com/newlogo.png",
+    "description": "Free QR code generator with custom design, logo embedding and real-time scan tracking. Create beautiful branded QR codes in seconds.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free static QR codes for all users, no sign up required"
+    },
+    "featureList": [
+      "Custom QR code design",
+      "Logo embedding",
+      "Dynamic QR tracking",
+      "PNG and SVG export",
+      "WiFi QR codes",
+      "vCard QR codes",
+      "No account required for static QR codes"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "QRScoop",
+      "url": "https://www.qrscoop.com"
+    }
   }
-}
-</script>
+  </script>
+
+  <!-- FAQ Schema for Google rich results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is QRScoop free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! QRScoop offers free static QR codes with no account required. You can customize colors, add a logo, and download in PNG or SVG format instantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I create a QR code with my logo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, QRScoop lets you embed your own logo into any QR code. Simply upload your logo image and it will be placed at the center of the QR code."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a dynamic QR code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A dynamic QR code lets you change the destination URL after printing, and tracks how many times the code was scanned. QRScoop offers dynamic QR codes with real-time scan analytics."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to create an account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No account is needed for static QR codes. Create a free account to unlock dynamic QR codes with scan tracking and analytics."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
+
+  <!-- Noscript fallback for SEO crawlers and users without JS -->
+  <noscript>
+    <div style="font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 20px;">
+      <h1>QRScoop — Free QR Code Generator &amp; Tracker</h1>
+      <p>Create beautiful, branded QR codes in seconds. Customize colors, add your logo, and track scans in real time.</p>
+      <h2>Features</h2>
+      <ul>
+        <li>Free static QR codes — no account needed</li>
+        <li>Custom colors and logo embedding</li>
+        <li>Dynamic QR codes with real-time scan tracking</li>
+        <li>WiFi QR codes and vCard QR codes</li>
+        <li>Download in PNG or SVG format</li>
+      </ul>
+      <p>Please enable JavaScript to use QRScoop.</p>
+    </div>
+  </noscript>
+
   <script type="module" src="/src/main.jsx"></script>
 </body>
 
