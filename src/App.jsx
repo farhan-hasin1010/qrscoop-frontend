@@ -273,11 +273,11 @@ export default function App() {
           }, { onConflict: 'user_id' });
           localStorage.removeItem('pending_signup_location');
         }
-        setView('app');
+        nav('app');
       }
 
       if (event === 'SIGNED_OUT') {
-        setView('landing');
+        nav('landing');
         setDashData([]);
         setIsPremium(false);
         setUserProfile({ name: '', email: '', avatar: '', location: '' });
@@ -562,7 +562,7 @@ export default function App() {
   });
 
   const openRazorpay = async (upiOnly = false) => {
-    if (!session) { setView('login'); return; }
+    if (!session) { nav('login'); return; }
     const ok = await loadRazorpay();
     if (!ok) { showToast('Failed to load payment SDK.', 'error'); return; }
 
@@ -1868,9 +1868,9 @@ export default function App() {
             <span>QRScoop</span>
           </div>
           <div className="flex flex-wrap justify-center gap-6 text-sm font-bold text-slate-500">
-            <button onClick={() => nav('tos')}     className="hover:text-blue-600 transition cursor-pointer">Terms of Service</button>
-            <button onClick={() => nav('privacy')} className="hover:text-blue-600 transition cursor-pointer">Privacy Policy</button>
-            <button onClick={() => nav('refund')}  className="hover:text-blue-600 transition cursor-pointer">Refund Policy</button>
+            <button onClick={() => { nav('tos');     window.scrollTo(0, 0); }} className="hover:text-blue-600 transition cursor-pointer">Terms of Service</button>
+            <button onClick={() => { nav('privacy'); window.scrollTo(0, 0); }} className="hover:text-blue-600 transition cursor-pointer">Privacy Policy</button>
+            <button onClick={() => { nav('refund');  window.scrollTo(0, 0); }} className="hover:text-blue-600 transition cursor-pointer">Refund Policy</button>
           </div>
           <div className="text-xs font-medium text-slate-400">
             © {new Date().getFullYear()} QRScoop. All rights reserved.
