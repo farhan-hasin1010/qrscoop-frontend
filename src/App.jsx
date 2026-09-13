@@ -26,6 +26,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import QRCodeStyling from 'qr-code-styling';
 import { supabase } from './supabaseClient.js';
 
@@ -106,7 +107,26 @@ const isValidHttpUrl = (str) => {
 export default function App() {
 
   // ── Routing ───────────────────────────────────────────────────────────────
-  const [view, setView]       = useState('landing');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const ROUTE_MAP = {
+    landing: '/',
+    app: '/generate',
+    howto: '/how-to-use',
+    marketing: '/for-business',
+    guide: '/qr-guide',
+    pricing: '/pricing',
+    dashboard: '/dashboard',
+    login: '/login',
+    tos: '/terms',
+    privacy: '/privacy',
+    refund: '/refund',
+  };
+
+  const view = Object.keys(ROUTE_MAP).find(
+    (k) => ROUTE_MAP[k] === location.pathname
+  ) || 'landing';
   const [menuOpen, setMenuOpen] = useState(false);
 
   // ── Auth & Profile ────────────────────────────────────────────────────────
@@ -597,7 +617,11 @@ export default function App() {
   };
 
   // ── Nav helper ────────────────────────────────────────────────────────────
-  const nav = (v) => { setView(v); setMenuOpen(false); };
+  const nav = (v) => {
+    navigate(ROUTE_MAP[v] || '/');
+    setMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
   const NAV_ITEMS = [
     { label: 'Generator',    view: 'app'       },
     { label: 'How to Use',   view: 'howto'     },
@@ -688,11 +712,15 @@ export default function App() {
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-600 border border-blue-100">
                   ✨ Free to get started — no credit card needed
                 </span>
+
+                {/* FIX 1: SEO-optimized H1 targeting US search queries */}
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
-                  Design & track <span className="text-blue-600">beautiful QR codes</span> in seconds
+                  Free QR Code Generator —{' '}
+                  <span className="text-blue-600">Custom Colors, Logo & Scan Tracking</span>
                 </h1>
+
                 <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-lg">
-                  Fully customizable dots, colors, and logos. Embed dynamic tracking to see exactly who scans your codes, when, and where.
+                  Create beautiful, branded QR codes in seconds. Customize dot styles, colors, and embed your logo. Track every scan in real time — no account needed for static QR codes.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button onClick={() => nav('app')} className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-full shadow-lg shadow-blue-500/25 transition">
@@ -735,20 +763,11 @@ export default function App() {
               </div>
             </section>
 
-            {/* Stats */}
-            <section className="bg-blue-600 py-10">
-              <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
-                {[['10M+', 'QR codes generated'], ['750%', 'Growth since 2020'], ['45%', 'Users scan monthly'], ['99.9%', 'Uptime SLA']].map(([n, l]) => (
-                  <div key={l}><div className="text-3xl font-black">{n}</div><div className="text-blue-200 text-sm font-medium mt-1">{l}</div></div>
-                ))}
-              </div>
-            </section>
-
             {/* Features */}
             <section className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-20">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-3">Everything you need in one place</h2>
-                <p className="text-slate-500 font-medium max-w-xl mx-auto">From basic link QRs to fully branded enterprise codes with real-time scan analytics.</p>
+                <p className="text-slate-500 font-medium max-w-xl mx-auto">From basic link QRs to fully branded codes with real-time scan analytics.</p>
               </div>
               <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {[
@@ -764,6 +783,50 @@ export default function App() {
                     <h3 className="font-black text-slate-900 text-lg">{f.title}</h3>
                     <p className="text-slate-500 text-sm leading-relaxed font-medium">{f.desc}</p>
                   </div>
+                ))}
+              </div>
+            </section>
+
+            {/* FIX 2: FAQ Section — matches schema markup in index.html */}
+            <section className="max-w-4xl mx-auto px-4 md:px-8 py-16">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-3">Frequently Asked Questions</h2>
+                <p className="text-slate-500 font-medium">Everything you need to know about QRScoop.</p>
+              </div>
+              <div className="space-y-4">
+                {[
+                  {
+                    q: 'Is QRScoop free to use?',
+                    a: 'Yes! QRScoop offers free static QR codes with no account required. You can customize colors, add a logo, and download in PNG or SVG format instantly. Create a free account to unlock dynamic QR codes with real-time scan tracking.',
+                  },
+                  {
+                    q: 'Can I create a QR code with my own logo?',
+                    a: 'Absolutely. QRScoop lets you upload and embed your logo directly into any QR code. It\'s placed at the center with automatic error correction so the code stays scannable.',
+                  },
+                  {
+                    q: 'What is a dynamic QR code?',
+                    a: 'A dynamic QR code lets you change the destination URL at any time after printing — no need to reprint. It also tracks how many times the code was scanned, giving you real-time scan analytics.',
+                  },
+                  {
+                    q: 'Do I need to create an account?',
+                    a: 'No account is needed for static QR codes. Simply open QRScoop, customize your code, and download it instantly. Sign up for free to unlock dynamic QR codes, scan tracking, and a personal dashboard.',
+                  },
+                  {
+                    q: 'What file formats can I download?',
+                    a: 'You can download your QR code as a PNG (perfect for web and digital use) or SVG (ideal for print at any size without quality loss).',
+                  },
+                  {
+                    q: 'What types of QR codes can I create?',
+                    a: 'QRScoop supports URL QR codes, WiFi QR codes, vCard contact QR codes, and plain text QR codes — all with full design customization.',
+                  },
+                ].map(({ q, a }) => (
+                  <details key={q} className="group bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
+                    <summary className="flex items-center justify-between px-6 py-5 cursor-pointer list-none">
+                      <h3 className="font-black text-slate-900 text-base pr-4">{q}</h3>
+                      <span className="text-slate-400 text-xl font-black shrink-0 group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p className="px-6 pb-5 text-slate-500 text-sm leading-relaxed font-medium">{a}</p>
+                  </details>
                 ))}
               </div>
             </section>
