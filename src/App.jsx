@@ -1868,9 +1868,9 @@ export default function App() {
             <span>QRScoop</span>
           </div>
           <div className="flex flex-wrap justify-center gap-6 text-sm font-bold text-slate-500">
-            <button onClick={() => { setView('tos');     window.scrollTo(0, 0); }} className="hover:text-blue-600 transition cursor-pointer">Terms of Service</button>
-            <button onClick={() => { setView('privacy'); window.scrollTo(0, 0); }} className="hover:text-blue-600 transition cursor-pointer">Privacy Policy</button>
-            <button onClick={() => { setView('refund');  window.scrollTo(0, 0); }} className="hover:text-blue-600 transition cursor-pointer">Refund Policy</button>
+            <button onClick={() => nav('tos')}     className="hover:text-blue-600 transition cursor-pointer">Terms of Service</button>
+            <button onClick={() => nav('privacy')} className="hover:text-blue-600 transition cursor-pointer">Privacy Policy</button>
+            <button onClick={() => nav('refund')}  className="hover:text-blue-600 transition cursor-pointer">Refund Policy</button>
           </div>
           <div className="text-xs font-medium text-slate-400">
             © {new Date().getFullYear()} QRScoop. All rights reserved.
